@@ -9,11 +9,13 @@ import hu.iqjb2.domain.model.Department;
 import hu.iqjb2.remote.intf.DepartmentServiceInterface;
 import hu.iqjb2.repository.DepartmentRepositoryAlpha;
 import hu.iqjb2.repository.DepartmentRepositoryBeta;
+import interceptor.LoggingTimeInterceptor;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.interceptor.Interceptors;
 
 /**
  *
@@ -29,12 +31,14 @@ public class DepartmentService implements DepartmentServiceInterface {
     @EJB
     private DepartmentRepositoryAlpha dAlpha;
 
+    @Interceptors(LoggingTimeInterceptor.class)
     @Override
     public void add(Department department) {
         dAlpha.add(department);
         dBeta.add(department);
     }
 
+    @Interceptors(LoggingTimeInterceptor.class)
     @Override
     public List<Department> getAll() {
         List<Department> da = dAlpha.getAll();

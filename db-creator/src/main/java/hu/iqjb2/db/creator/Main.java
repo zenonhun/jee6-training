@@ -8,6 +8,7 @@ package hu.iqjb2.db.creator;
 import hu.iqjb2.domain.model.Address;
 import hu.iqjb2.domain.model.Department;
 import hu.iqjb2.domain.model.Employee;
+import hu.iqjb2.domain.model.IqjbLog;
 import hu.iqjb2.domain.model.Project;
 import hu.iqjb2.domain.model.Role;
 import hu.iqjb2.domain.model.Task;
@@ -28,6 +29,7 @@ public class Main {
 
     private static final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory("iqjb2aPU");
     private static final EntityManagerFactory FACTORY2 = Persistence.createEntityManagerFactory("iqjb2bPU");
+    private static final EntityManagerFactory FACTORYLOG = Persistence.createEntityManagerFactory("iqjbLoggerPU");
 
     /**
      * @param args the command line arguments
@@ -87,6 +89,13 @@ public class Main {
         em2.persist(deparmentEri);
         em2.persist(deparmentHQ);
         tx2.commit();
+
+        EntityManager em3 = FACTORYLOG.createEntityManager();
+        EntityTransaction tx3 = em3.getTransaction();
+        tx3.begin();
+        IqjbLog log = new IqjbLog("testFunc", 123L, "MEE");
+        em3.persist(log);
+        tx3.commit();
 
         em.createQuery("select e from Employee e", Employee.class)
                 .getResultList()

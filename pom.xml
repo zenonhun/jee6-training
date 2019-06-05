@@ -11,7 +11,8 @@
     <module>server1</module>
         <module>remote-intf</module>
         <module>remote-client</module>
-    </modules>
+    <module>server2</module>
+  </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>

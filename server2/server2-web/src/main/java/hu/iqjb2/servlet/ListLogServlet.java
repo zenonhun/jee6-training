@@ -5,31 +5,25 @@
  */
 package hu.iqjb2.servlet;
 
-import interceptor.LoggingTimeInterceptor;
+import hu.iqjb2.LoggingService;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.concurrent.atomic.AtomicInteger;
 import javax.ejb.EJB;
-import javax.interceptor.Interceptors;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import message.AddDepartmentRequest;
-import message.AddDepartmentResponse;
-import servicefacade.DepartmentServiceFacade;
 
 /**
  *
  * @author IQJB
  */
-@WebServlet(name = "AddDepartmenServlet", urlPatterns = {"/adddepartmenservlet"})
-public class AddDepartmenServlet extends HttpServlet {
+@WebServlet(name = "ListLogServlet", urlPatterns = {"/listlogs"})
+public class ListLogServlet extends HttpServlet {
 
     @EJB
-    private DepartmentServiceFacade departmentServiceFacade;
-    private final AtomicInteger number = new AtomicInteger();
+    private LoggingService loggingService;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,25 +34,26 @@ public class AddDepartmenServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Interceptors(LoggingTimeInterceptor.class)
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            AddDepartmentRequest addDepartmentRequest = new AddDepartmentRequest();
-            addDepartmentRequest.setDepartmentName("department" + number.getAndIncrement());
-            AddDepartmentResponse resp = departmentServiceFacade.addDepartment(addDepartmentRequest);
-
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddDepartmenServlet</title>");
+            out.println("<title>Servlet ListLogServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddDepartmenServlet at " + request.getContextPath() + "</h1>");
-            out.println("<h2>Added department: " + resp.getResult() + "</h2>");
+            out.println("<h1>Servlet ListLogServlet at " + request.getContextPath() + "</h1>");
+            out.println("<table>");
+            loggingService.listLog().forEach(l -> out.println("<tr>"
+                    + "<td>" + l.getFunctionName() + "</td>"
+                    + "<td>" + l.getCallerPrincipal() + "</td>"
+                    + "<td>" + l.getExecTime() + "</td>"
+                    + "<td>" + l.getCreated() + "</td>"
+                    + "</tr>"
+            ));
+            out.println("</table>");
             out.println("</body>");
             out.println("</html>");
         }

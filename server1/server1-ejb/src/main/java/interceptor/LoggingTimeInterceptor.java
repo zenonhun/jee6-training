@@ -7,10 +7,10 @@ package interceptor;
 
 import hu.iqjb2.remote.intf.LoggingServiceInterface;
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.ejb.SessionContext;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
-import javax.naming.InitialContext;
 
 /**
  *
@@ -21,6 +21,9 @@ public class LoggingTimeInterceptor {
     @Resource
     private SessionContext sessionContext;
 
+    @EJB(lookup = "hu.iqjb2.remote.intf.LoggingServiceInterface")
+    private LoggingServiceInterface loggingServiceInterface;
+
     @AroundInvoke
     public Object measureExecTime(InvocationContext ctx) throws Exception {
         String functionName = ctx.getTarget().getClass().getName() + ":" + ctx.getMethod().getName();
@@ -30,8 +33,7 @@ public class LoggingTimeInterceptor {
         Object obj = ctx.proceed();
         elapsedTime = System.currentTimeMillis() - elapsedTime;
 
-        LoggingServiceInterface lsi = (LoggingServiceInterface) new InitialContext().lookup("hu.iqjb2.remote.intf.LoggingServiceInterface");
-        lsi.save(functionName, elapsedTime, callerPrincipal);
+        loggingServiceInterface.save(functionName, elapsedTime, callerPrincipal);
 
         return obj;
     }

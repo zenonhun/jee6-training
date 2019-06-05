@@ -44,7 +44,7 @@ public class ListLogServlet extends HttpServlet {
             out.println("<title>Servlet ListLogServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ListLogServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ListLogServlet xxxx at " + request.getContextPath() + "</h1>");
             out.println("<table>");
             loggingService.listLog().forEach(l -> out.println("<tr>"
                     + "<td>" + l.getFunctionName() + "</td>"

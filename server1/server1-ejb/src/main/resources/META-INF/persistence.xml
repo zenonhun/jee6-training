@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="iqjb2aPU" transaction-type="JTA">
+    <jta-data-source>iqjb2a</jta-data-source>
+    <class>hu.iqjb2.domain.model.Department</class>
+    <class>hu.iqjb2.domain.model.Employee</class>
+    <class>hu.iqjb2.domain.model.Project</class>
+    <class>hu.iqjb2.domain.model.Role</class>
+    <class>hu.iqjb2.domain.model.Task</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties/>
+  </persistence-unit>
+  <persistence-unit name="iqjb2bPU" transaction-type="JTA">
+    <jta-data-source>iqjb2b</jta-data-source>
+    <class>hu.iqjb2.domain.model.Department</class>
+    <class>hu.iqjb2.domain.model.Employee</class>
+    <class>hu.iqjb2.domain.model.Project</class>
+    <class>hu.iqjb2.domain.model.Role</class>
+    <class>hu.iqjb2.domain.model.Task</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties/>
+  </persistence-unit>  
+</persistence>

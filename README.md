@@ -31,5 +31,16 @@ Security:
  - JAAS - JAVA EE
  - Spring Security - https://spring.io/projects/spring-security
 
-Jax-RS
- - Book: Beginning Java EE7
+Spring:
+ - https://start.spring.io/
+ - https://spring.io/projects/spring-security
+ - https://spring.io/projects/spring-restdocs
+
+Books:
+ - Debu Panda - EJB3 In Action
+ - Beginning Java EE7 
+ - Pro JPA 2
+ - Beginning Spring
+ - Spring in Action
+ - Springboot in Action
+ - Pro Spring Boot

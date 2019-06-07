@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns="http://www.w3.org/1999/xhtml"
+>
+
+<script language="Javascript">
+
+</script>
+
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="#{facesContext.externalContext.requestContextPath}/resources/css/default.css" rel="stylesheet"
+          type="text/css"/>
+    <title>IQJB Alkalmazás</title>
+</h:head>
+<style>
+        .ui-panelgrid tr, .ui-panelgrid td {
+            border:0 !important;
+        }
+
+
+</style>
+
+<h:body>
+    <div class="main-container">
+
+        <center>
+            <div class="login-section">
+                <h:form id="login" onsubmit="document.getElementById('login').action = 'applogin';"
+                        prependId="false">
+                    <p:panel header="Bejelentkezés az IQJB Alkalmazásba"
+                             style="height: 250px; width: 450px;">
+                        <p:panelGrid style="margin: 20px; border: 0 !important;">
+                            <p:row>
+                                <p:column>
+                                    <h:outputLabel for="username" value="Felhasználó név:"/>
+                                </p:column>
+                                <p:column>
+                                    <p:inputText id="username" style="width: 150px;"/>
+                                </p:column>
+                            </p:row>
+
+                            <p:row>
+                                <p:column>
+                                    <h:outputLabel for="password" value="Jelszó:"/>
+                                </p:column>
+                                <p:column>
+                                    <p:password id="password" style="width: 150px;"/>
+                                </p:column>
+                            </p:row>
+
+                            <p:spacer height="30"></p:spacer>
+
+                            <p:row>
+                                <p:column/>
+                                <p:column>
+                                    <p:commandButton type="submit" value="Bejelentkezés" icon="ui-icon-check"
+                                                     style="margin:0;float: right;" ajax="false"/>
+                                </p:column>
+                            </p:row>
+
+                            <p:row>
+                                <p:column colspan="2">
+                                    <p:spacer height="11"/>
+                                </p:column>
+                            </p:row>
+                            <c:if test="#{not empty param.login_error}">
+                                <p:row>
+                                    <p:column colspan="2">
+                                        <center>
+                                            <h:outputLabel value="Hibás felhasználónév/jelszó!" style="color: red;"/>
+                                        </center>
+                                    </p:column>
+                                </p:row>
+                            </c:if>
+                        </p:panelGrid>
+                    </p:panel>
+                </h:form>
+            </div>
+        </center>
+
+    </div>
+</h:body>
+</html>

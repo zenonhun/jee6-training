@@ -5,6 +5,8 @@
  */
 package hu.iqjb2.timer;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.ActivationConfigProperty;
 import javax.ejb.MessageDriven;
 import javax.jms.JMSException;
@@ -21,6 +23,8 @@ import javax.jms.TextMessage;
 })
 public class TimeReceiver implements MessageListener {
 
+    private static final Logger LOG = Logger.getLogger(TimeReceiver.class.getName());
+
     public TimeReceiver() {
     }
 
@@ -28,7 +32,7 @@ public class TimeReceiver implements MessageListener {
     public void onMessage(Message message) {
         try {
             TextMessage msg = (TextMessage) message;
-            System.out.println(msg.getText());
+            LOG.log(Level.INFO, "Receving: {0}", msg.getText());
         } catch (JMSException e) {
             System.out.println("Error during processing message " + e);
         }

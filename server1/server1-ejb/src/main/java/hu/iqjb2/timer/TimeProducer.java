@@ -6,6 +6,7 @@
 package hu.iqjb2.timer;
 
 import java.util.Date;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.ejb.LocalBean;
@@ -36,16 +37,16 @@ public class TimeProducer {
     @Resource(mappedName = "jms/iqjb-factory")
     private ConnectionFactory queueFactory;
 
-    @Schedule(second = "0/5", minute = "*", hour = "*")
+    @Schedule(second = "0/5", minute = "*", hour = "*", persistent = false)
     public void sendMessage() {
-        LOG.info("Message is senindg.."); //TODO not working
-        sendJMSMessage(new Date().toString());
+        String msg = new Date().toString();
+        sendJMSMessage(msg);
+        LOG.log(Level.INFO, "Sending: {0}", msg);
     }
 
     private TextMessage createJMSMessage(Session session, String messageData) throws JMSException {
         TextMessage tm = session.createTextMessage();
         tm.setText(messageData);
-        LOG.info(messageData);
         return tm;
     }
 

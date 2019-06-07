@@ -30,3 +30,6 @@ https://projectlombok.org
 Security:
  - JAAS - JAVA EE
  - Spring Security - https://spring.io/projects/spring-security
+
+Jax-RS
+ - Book: Beginning Java EE7
